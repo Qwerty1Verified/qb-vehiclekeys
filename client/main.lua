@@ -55,7 +55,19 @@ CreateThread(function()
                             end)
                         end
                     elseif Config.LockNPCDrivingCars then
-                        TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 2)
+						if math.random(1, 100) <= 70 then
+                        	TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 2)
+						else
+							TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 1)
+
+							--Make passengers flee
+							local pedsInVehicle = GetPedsInVehicle(entering)
+							for _, pedInVehicle in pairs(pedsInVehicle) do
+								if pedInVehicle ~= GetPedInVehicleSeat(entering, -1) then
+									MakePedFlee(pedInVehicle)
+								end
+							end
+						end
                     else
                         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 1)
                         TriggerServerEvent('qb-vehiclekeys:server:AcquireVehicleKeys', plate)
@@ -71,7 +83,11 @@ CreateThread(function()
                 -- Parked car logic
                 elseif driver == 0 and entering ~= lastPickedVehicle and not HasKeys(plate) and not isTakingKeys then
                     if Config.LockNPCParkedCars then
-                        TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 2)
+						if math.random(1, 100) <= 70 then
+                        	TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 2)
+						else
+							TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 1)
+						end
                     else
                         TriggerServerEvent('qb-vehiclekeys:server:setVehLockState', NetworkGetNetworkIdFromEntity(entering), 1)
                     end
