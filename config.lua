@@ -2,7 +2,9 @@ Config = {}
 
 -- NPC Vehicle Lock States
 Config.LockNPCDrivingCars = true -- Lock state for NPC cars being driven by NPCs [true = locked, false = unlocked]
+Config.UnlockedNPCDrivingCarsChance = 0 -- Chance of unlocked driven NPC cars
 Config.LockNPCParkedCars = true -- Lock state for NPC parked cars [true = locked, false = unlocked]
+Config.UnlockedNPCParkedCarsChance = 0 -- Chance of unlocked parked NPC cars
 
 -- Lockpick Settings
 Config.RemoveLockpickNormal = 0.5 -- Chance to remove lockpick on fail
